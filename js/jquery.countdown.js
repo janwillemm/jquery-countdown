@@ -198,12 +198,12 @@ var start = function (element) {
 };
 
 var pause = function(element) {
-  if (element.attr('started') != 'true') {  
+  if (element.attr('started') == 'true') {  
     element.attr('started', false)
+    clearInterval(intervals.main);
     for (var i = 0; i < digits.length; i++) {
       clearInterval(intervals[i]);
     }
-    clearInterval(intervals.main);
   }
 }
 
@@ -252,6 +252,6 @@ jQuery.fn.start = function () {
 	start(this);
 };
 
-jQuery.fn.pause = function(){
-  stop(this);
+jQuery.fn.pauseCountdown = function(){
+  pause(this);
 }
