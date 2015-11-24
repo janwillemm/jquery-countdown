@@ -197,6 +197,16 @@ var start = function (element) {
 	}
 };
 
+var pause = function(element) {
+  if (element.attr('started') != 'true') {  
+    element.attr('started', false)
+    for (var i = 0; i < digits.length; i++) {
+      clearInterval(intervals[i]);
+    }
+    clearInterval(intervals.main);
+  }
+}
+
 var digits = [];
 var intervals = [];
 jQuery.fn.countdown = function(userOptions) {
@@ -241,3 +251,7 @@ jQuery.fn.countdown = function(userOptions) {
 jQuery.fn.start = function () {
 	start(this);
 };
+
+jQuery.fn.pause = function(){
+  stop(this);
+}
