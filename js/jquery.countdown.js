@@ -187,13 +187,13 @@ var formatCompute = function(d, options) {
 // add leading zeros
 var pad = function(x){return (1e15+""+x).slice(-2)};
 
-var start = function (element) {
+var start = function (element, speed) {
 	if (element.attr('started') != 'true') {	
 		element.attr('started', true)
 		intervals.main = setInterval(function () {
 				moveDigit(digits.length - 1, element.data('options'));
 			},
-			1000);
+			speed);
 	}
 };
 
@@ -223,7 +223,8 @@ jQuery.fn.countdown = function(userOptions) {
     timerEnd: function(){},
     image: "digits.png",
     continuous: false,
-	start: true
+	  start: true,
+    speed:800, // MS
   };
   $.extend(options, userOptions);
 
@@ -242,14 +243,14 @@ jQuery.fn.countdown = function(userOptions) {
     createDigits(this, options);
 	this.data('options', options);
 	if (options.start === true) {
-		start(this);
+		start(this, options.speed);
 	}
   }
 };
 
 // start the counter
-jQuery.fn.start = function () {
-	start(this);
+jQuery.fn.start = function (speed) {
+	start(this, speed);
 };
 
 jQuery.fn.pauseCountdown = function(){
